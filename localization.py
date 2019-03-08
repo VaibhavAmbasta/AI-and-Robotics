@@ -4,13 +4,12 @@
 #uncertainty increases when moving but decreases when our agent senses a measurement. Our final state is thus determined
 #by a series of move and sense functions.
 
-# The function localize takes the following arguments:
-#
+
 # colors:
-#        2D list, each entry either 'R' (for red cell) or 'G' (for green cell)
-#
+#    2D list, each entry either 'R' (for red cell) or 'G' (for green cell)
+
 # measurements:
-#        list of measurements taken by the robot, each entry either 'R' or 'G'
+#    list of measurements taken by the robot, each entry either 'R' or 'G'
 #
 # motions:
 #        list of actions taken by the robot, each entry of the form [dy,dx],
@@ -19,26 +18,19 @@
 #        (positive meaning movement downward)
 #        NOTE: the *first* coordinate is change in y; the *second* coordinate is
 #              change in x
-#
+
 # sensor_right:
 #        float between 0 and 1, giving the probability that any given
 #        measurement is correct; the probability that the measurement is
 #        incorrect is 1-sensor_right
-#
+
 # p_move:
 #        float between 0 and 1, giving the probability that any given movement
 #        command takes place; the probability that the movement command fails
 #        (and the robot remains still) is 1-p_move; the robot will NOT overshoot
 #        its destination in this exercise
-#
-# The function should RETURN (not just show or print) a 2D list (of the same
-# dimensions as colors) that gives the probabilities that the robot occupies
-# each cell in the world.
-#
-# Compute the probabilities by assuming the robot initially has a uniform
-# probability of being in any cell.
-#
-# Also assume that at each step, the robot:
+
+
 # 1) first makes a movement,
 # 2) then takes a measurement.
 #
