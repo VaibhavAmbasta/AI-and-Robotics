@@ -1,3 +1,5 @@
+#The following code was done as an assignment of the Udacity AI for Robotics course.
+
 #this is the kalman filter implementation for an n-dimensional world.
 #this algorithm is based on the gaussian function, that is used to represnt the probability distribution
 #over space. The certainty is greatly improvised after the measurement step, with the gaussian covariance reducing,
@@ -13,8 +15,7 @@ from math import *
 
 class matrix:
     
-    # implements basic operations of a matrix class
-    
+       
     def __init__(self, value):
         self.value = value
         self.dimx = len(value)
@@ -95,9 +96,8 @@ class matrix:
             for j in range(self.dimy):
                 res.value[j][i] = self.value[i][j]
         return res
-    
-    # Thanks to Ernesto P. Adorio for use of Cholesky and CholeskyInverse functions
-    
+   
+   
     def Cholesky(self, ztol=1.0e-5):
         # Computes the upper triangular Cholesky factorization of
         # a positive definite matrix.
@@ -147,7 +147,7 @@ class matrix:
         return repr(self.value)
 
 
-########################################
+#implementing the filter now;
 
 def filter(x, P):
     for n in range(len(measurements)):
@@ -169,7 +169,7 @@ def filter(x, P):
     print 'P= '
     P.show()
 
-########################################
+#
 
 print "### 4-dimensional example ###"
 
@@ -195,10 +195,9 @@ F =  matrix([[1.,0.,.1,0.],[0.,1.,0.,.1],[0.,0.,1.,0.],[0.,0.,0.,1.]])
 H =  matrix([[1.,0.,0.,0.],[0.,1.,0.,0.]])
 # measurement function: reflect the fact that we observe x and y but not the two velocities
 R =  matrix([[.1,0],[0,.1]])
-# measurement uncertainty: use 2x2 matrix with 0.1 as main diagonal
+# measurement uncertainty: a 2x2 matrix with 0.1 as main diagonal is being used
 I =  matrix([[]])
 I.identity(4)
-###### DO NOT MODIFY ANYTHING HERE #######
 
 filter(x, P)
 
