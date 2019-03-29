@@ -1,0 +1,95 @@
+# ----------
+# User Instructions:
+# 
+# Define a function, search() that returns a list
+# in the form of [optimal path length, row, col]. For
+# the grid shown below, your function should output
+# [11, 4, 5].
+#
+# If there is no valid path from the start point
+# to the goal, your function should return the string
+# 'fail'
+# ----------
+
+# Grid format:
+#   0 = Navigable space
+#   1 = Occupied space
+
+
+grid = [[0, 0, 1, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0],
+        [0, 0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 1, 0]]
+init = [0, 0]
+goal = [len(grid)-1, len(grid[0])-1]
+cost = 1
+
+delta = [[-1, 0], # go up
+         [ 0,-1], # go left
+         [ 1, 0], # go down
+         [ 0, 1]] # go right
+
+delta_name = ['^', '<', 'v', '>']
+
+explored_places=[]
+
+
+def search(grid,init,goal,cost):
+    # ----------------------------------------
+    # insert code here
+    count=0
+    open_list=[[0,init[0],init[1]]]#(G,X,Y)
+    for i in open_list:
+        
+          
+        s=len(open_list)
+        
+        if i[2]+1<=5 and grid[i[1]][i[2]+1]==0 and [i[1],i[2]+1] not in explored_places and check_1(i[1],i[2]+1,open_list):
+            open_list.append([i[0]+cost,i[1],i[2]+1])
+        
+        if i[1]+1<=4 and grid[i[1]+1][i[2]]==0 and [i[1]+1,i[2]] not in explored_places and check_1(i[1]+1,i[2],open_list):
+            open_list.append([i[0]+cost,i[1]+1,i[2]])
+                              
+        if i[1]-1>=0 and grid[i[1]-1][i[2]]==0 and [i[1]-1,i[2]] not in explored_places and check_1(i[1]-1,i[2],open_list):
+            open_list.append([i[0]+cost,i[1]-1,i[2]])
+                              
+        if i[2]-1>=0 and grid[i[1]][i[2]-1]==0 and [i[1],i[2]-1] not in explored_places and check_1(i[1],i[2]-1,open_list):
+            open_list.append([i[0]+cost,i[1],i[2]-1])
+            
+        #check if goal is found
+        
+        for j in open_list:
+            if (j[1],j[2])==(goal[0],goal[1]):
+                print ("Success")
+                print (j[0],j[1],j[2])
+                count=1
+                break
+            
+        if count==1:
+            break
+        
+        #if elements not added, then it is not possible
+        
+        if len(open_list)==s:
+            print ("It is not possible to get to goal state.")
+            break
+            
+            
+        explored_places.append([i[1],i[2]])    
+        
+                           
+        open_list.remove(i)
+#        open_list.sort()
+
+def check_1(x,y,z):
+    for i in z:
+        if i[1]==x and i[2]==y:
+            return False
+    return True    
+    
+        
+    # ----------------------------------------
+search(grid,init,goal,cost)    
+
+    #return path
